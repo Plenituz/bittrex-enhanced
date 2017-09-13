@@ -287,7 +287,7 @@ Enhancer.enhanceMarketHistoryTable = function enhanceMarketHistoryTable(table){
 Enhancer.initTradingViewWidget = function initTradingViewWidget(ticker, tradingViewOpts){
   const script = document.createElement('script');
   script.src = CONSTANTS.tvChartURL;
-  script.async = true;
+  script.alocal = true;
   script.addEventListener('load', function(){
     let opts = {};
     Object.assign(opts, 
@@ -395,7 +395,7 @@ Enhancer.go = function go(){
   return Enhancer.getDataProcessors(type, Enhancer.opts)(document);
 }
 Enhancer.notifyBackground = function notifyBackground(){
-  chrome.runtime.sendMessage({
+  browser.runtime.sendMessage({
     processing:true
   }, function(settings){
     if(settings.tvChart) {

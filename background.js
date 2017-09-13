@@ -23,15 +23,15 @@ const TRADING_VIEW_DEFAULT_OPTIONS = {
     hideideas: true
 };
 
-chrome.browserAction.setBadgeBackgroundColor({'color':'#0072ed'});
-chrome.browserAction.setBadgeText({text: NOTINITED});
+browser.browserAction.setBadgeBackgroundColor({'color':'#0072ed'});
+browser.browserAction.setBadgeText({text: NOTINITED});
 
-chrome.runtime.onMessage.addListener(
+browser.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.processing){
-            chrome.browserAction.setBadgeText({text:INITED});
+            browser.browserAction.setBadgeText({text:INITED});
             const settings = {};
-            chrome.storage.sync.get([
+            browser.storage.local.get([
                 'bittrex-enhanced-tvChart', 
                 'bittrex-enhanced-usdVal', 
                 'bittrex-enhanced-tvChartOpts'
@@ -47,18 +47,18 @@ chrome.runtime.onMessage.addListener(
 );
 
 // Settings
-chrome.storage.sync.get([
+browser.storage.local.get([
     'bittrex-enhanced-usdVal',
     'bittrex-enhanced-tvChart',
     'bittrex-enhanced-tvChartOpts'
 ], function(data) {
     if(!data['bittrex-enhanced-usdVal']){
-        chrome.storage.sync.set({'bittrex-enhanced-usdVal': true});
+        browser.storage.local.set({'bittrex-enhanced-usdVal': true});
     }
     if(!data['bittrex-enhanced-tvChart']){
-        chrome.storage.sync.set({'bittrex-enhanced-tvChart': true});
+        browser.storage.local.set({'bittrex-enhanced-tvChart': true});
     }
     if(!data['bittrex-enhanced-tvChartOpts']){
-        chrome.storage.sync.set({'bittrex-enhanced-tvChartOpts': TRADING_VIEW_DEFAULT_OPTIONS})
+        browser.storage.local.set({'bittrex-enhanced-tvChartOpts': TRADING_VIEW_DEFAULT_OPTIONS})
     }
 });
